@@ -33,6 +33,7 @@ when "rhel", "fedora"
   end
 
   template "/etc/sysconfig/varnish" do
+    cookbook "rax-magento"
     source "varnish.erb"
     owner "root"
     group "root"
@@ -50,6 +51,7 @@ else
   end
 
   template "/etc/default/varnish" do
+    cookbook "rax-magento"
     source "varnish.erb"
     owner "root"
     group "root"
