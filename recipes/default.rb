@@ -20,8 +20,8 @@
 
 include_recipe 'magento::default'
 
-include_recipe 'magento-rackspace::php_fpm'
-include_recipe 'magento-rackspace::my_cnf'
-include_recipe 'magento-rackspace::percona'
-include_recipe 'magento-rackspace::memcached'
-include_recipe 'magento-rackspace::varnish'
+include_recipe 'rax-magento::php_fpm'
+include_recipe 'rax-magento::my_cnf'
+include_recipe 'rax-magento::percona'
+include_recipe 'rax-magento::memcached'
+include_recipe 'rax-magento::varnish'
