@@ -25,6 +25,6 @@ DAEMON_OPTS="-a :<%= node[:magento][:http_port] %> \
               -u varnish -g varnish \
               -t 120 \
               -w 5,500,300 \
-              -s malloc,<%= node[:magento][:varnish][:memory] %> \
+              -s malloc,<%= node[:rax][:magento][:varnish][:memory] %> \
               -S /etc/varnish/secret \
               -n $INSTANCE"
