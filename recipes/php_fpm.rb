@@ -1,8 +1,6 @@
 # Encoding: utf-8
 # Remove default fpm configuration
 
-node.set_unless['php-fpm']['pools'] = []
-
 include_recipe 'php-fpm'
 
 case node['platform']
