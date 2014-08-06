@@ -18,9 +18,12 @@
 # limitations under the License.
 #
 
+# This recipe will build a single server Magento Deployment
+
 include_recipe 'magento::default'
 
 include_recipe 'rax-magento::php_fpm'
 include_recipe 'rax-magento::my_cnf'
+include_recipe 'rax-magento::memcache-client'
 include_recipe 'rax-magento::memcached'
 include_recipe 'rax-magento::varnish'
