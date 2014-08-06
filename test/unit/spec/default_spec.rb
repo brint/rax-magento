@@ -2,7 +2,7 @@
 
 require_relative 'spec_helper'
 
-describe 'magento-rackspace::default' do
+describe 'rax-magento::default' do
   before { stub_resources }
   describe 'ubuntu' do
     let(:chef_run) { ChefSpec::Runner.new.converge(described_recipe) }

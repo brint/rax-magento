@@ -2,7 +2,7 @@
 # vi: set ft=ruby :
 
 Vagrant.configure('2') do |config|
-  config.vm.hostname = 'magento-rackspace'
+  config.vm.hostname = 'rax-magento'
   case ENV['VMBOX']
   when 'centos65'
     config.vm.box = "centos-6.5"
@@ -30,7 +30,7 @@ Vagrant.configure('2') do |config|
     }
 
     chef.run_list = [
-        'recipe[magento-rackspace::default]'
+        'recipe[rax-magento::default]'
     ]
   end
 end
