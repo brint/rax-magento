@@ -37,13 +37,14 @@ default[:rax][:magento][:memcached][:servers][:slow_backend][:compression] = 0
 # Varnish config
 default[:rax][:magento][:varnish][:use_varnish] = true
 default[:rax][:magento][:varnish][:backend_http] = 8080
-default[:rax][:magento][:varnish][:http_port] = 80 
+default[:rax][:magento][:varnish][:http_port] = 80
 default[:rax][:magento][:varnish][:memory] = "#{(node['memory']['total'].to_i / 4) / (1024)}M"
 
 # Page cache servers
 default[:rax][:magento][:pagecache][:servers] = []
 
 # Attributes for initial configuration of Magento
+default[:rax][:magento][:db][:prefix] = ''
 default[:rax][:magento][:db][:initStatements] = 'SET NAMES utf8'
 default[:rax][:magento][:db][:model] = 'mysql4'
 default[:rax][:magento][:db][:type] = 'pdo_mysql'
@@ -57,5 +58,5 @@ default[:rax][:magento][:url] = "http://#{node[:magento][:domain]}/"
 default[:rax][:magento][:use_rewrites] = 'yes'
 default[:rax][:magento][:use_secure] = 'yes'
 default[:rax][:magento][:secure_base_url] = "https://#{node[:magento][:domain]}/"
-default[:rax][:magento][:use_secure_admin] = 'no'
+default[:rax][:magento][:use_secure_admin] = 'yes'
 default[:rax][:magento][:enable_charts] = 'yes'

@@ -20,10 +20,17 @@
 
 # This recipe will build a single server Magento Deployment
 
+node.set[:magento][:http_port] = node[:rax][:magento][:varnish][:backend_http]
+
 include_recipe 'magento::default'
 
 include_recipe 'rax-magento::php_fpm'
 include_recipe 'rax-magento::my_cnf'
 include_recipe 'rax-magento::memcache-client'
+
+unless File.exist?(File.join(node[:magento][:dir], '.configured'))
+  magento_initial_configuration
+end
+
 include_recipe 'rax-magento::memcached'
 include_recipe 'rax-magento::varnish'

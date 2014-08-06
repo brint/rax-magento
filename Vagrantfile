@@ -22,6 +22,7 @@ Vagrant.configure('2') do |config|
         :server_repl_password => 'replpass'
       },
       :magento => {
+        :domain => 'example.com',
         :db => {
           :password => 'magepass'
         },
