@@ -37,6 +37,7 @@ default[:rax][:magento][:memcached][:servers][:slow_backend][:compression] = 0
 # Varnish config
 default[:rax][:magento][:varnish][:use_varnish] = true
 default[:rax][:magento][:varnish][:backend_http] = 8080
+default[:rax][:magento][:varnish][:http_port] = 80 
 default[:rax][:magento][:varnish][:memory] = "#{(node['memory']['total'].to_i / 4) / (1024)}M"
 
 # Page cache servers
