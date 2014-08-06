@@ -41,3 +41,20 @@ default[:rax][:magento][:varnish][:memory] = "#{(node['memory']['total'].to_i / 
 
 # Page cache servers
 default[:rax][:magento][:pagecache][:servers] = []
+
+# Attributes for initial configuration of Magento
+default[:rax][:magento][:db][:initStatements] = 'SET NAMES utf8'
+default[:rax][:magento][:db][:model] = 'mysql4'
+default[:rax][:magento][:db][:type] = 'pdo_mysql'
+default[:rax][:magento][:db][:pdoType] = ''
+default[:rax][:magento][:db][:active] = '1'
+default[:rax][:magento][:locale] = 'en_US'
+default[:rax][:magento][:timezone] = 'America/Chicago'
+default[:rax][:magento][:default_currency] = 'USD'
+default[:rax][:magento][:admin_frontname] = 'admin'
+default[:rax][:magento][:url] = "http://#{node[:magento][:domain]}/"
+default[:rax][:magento][:use_rewrites] = 'yes'
+default[:rax][:magento][:use_secure] = 'yes'
+default[:rax][:magento][:secure_base_url] = "https://#{node[:magento][:domain]}/"
+default[:rax][:magento][:use_secure_admin] = 'no'
+default[:rax][:magento][:enable_charts] = 'yes'
