@@ -1,0 +1,12 @@
+INSERT INTO `core_config_data` (`scope`, `scope_id`, `path`, `value`) VALUES ('default', '0', 'varnishcache/general/enabled', '1');
+INSERT INTO `core_config_data` (`scope`, `scope_id`, `path`, `value`) VALUES ('default', '0', 'varnishcache/general/servers', '<%= @varnishservers %>');
+INSERT INTO `core_config_data` (`scope`, `scope_id`, `path`, `value`) VALUES ('default', '0', 'varnishcache/general/port', '80');
+INSERT INTO `core_config_data` (`scope`, `scope_id`, `path`, `value`) VALUES ('default', '0', 'varnishcache/general/disable_caching', '0');
+INSERT INTO `core_config_data` (`scope`, `scope_id`, `path`, `value`) VALUES ('default', '0', 'varnishcache/general/disable_routes', 'checkout\r\ncustomer\r\nmoneybookers\r\npaypal\r\nwishlist\r\ncatalog_product_compare');
+INSERT INTO `core_config_data` (`scope`, `scope_id`, `path`, `value`) VALUES ('default', '0', 'varnishcache/general/disable_caching_vars', '___SID,order');
+INSERT INTO `core_config_data` (`scope`, `scope_id`, `path`, `value`) VALUES ('default', '0', 'varnishcache/general/ttl', '86200');
+INSERT INTO `core_config_data` (`scope`, `scope_id`, `path`, `value`) VALUES ('default', '0', 'varnishcache/general/routes_ttl', 'a:3:{i:1;a:2:{s:6:\"regexp\";s:3:\"cms\";s:5:\"value\";s:5:\"86400\";}i:2;a:2:{s:6:\"regexp\";s:20:\"catalog_product_view\";s:5:\"value\";s:4:\"7200\";}i:3;a:2:{s:6:\"regexp\";s:16:\"catalog_category\";s:5:\"value\";s:5:\"21600\";}}');
+INSERT INTO `core_config_data` (`scope`, `scope_id`, `path`, `value`) VALUES ('default', '0', 'varnishcache/general/purge_catalog_category', '1');
+INSERT INTO `core_config_data` (`scope`, `scope_id`, `path`, `value`) VALUES ('default', '0', 'varnishcache/general/purge_catalog_product', '1');
+INSERT INTO `core_config_data` (`scope`, `scope_id`, `path`, `value`) VALUES ('default', '0', 'varnishcache/general/purge_cms_page', '1');
+INSERT INTO `core_config_data` (`scope`, `scope_id`, `path`, `value`) VALUES ('default', '0', 'varnishcache/general/debug', '0');

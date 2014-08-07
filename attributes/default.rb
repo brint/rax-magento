@@ -41,7 +41,7 @@ default[:rax][:magento][:varnish][:http_port] = 80
 default[:rax][:magento][:varnish][:memory] = "#{(node['memory']['total'].to_i / 4) / (1024)}M"
 
 # Page cache servers
-default[:rax][:magento][:pagecache][:servers] = []
+default[:rax][:magento][:pagecache][:servers] = ['127.0.0.1']
 
 # Attributes for initial configuration of Magento
 default[:rax][:magento][:db][:prefix] = ''
@@ -60,3 +60,11 @@ default[:rax][:magento][:use_secure] = 'yes'
 default[:rax][:magento][:secure_base_url] = "https://#{node[:magento][:domain]}/"
 default[:rax][:magento][:use_secure_admin] = 'yes'
 default[:rax][:magento][:enable_charts] = 'yes'
+
+# FPM Settings
+default['rax']['php-fpm']['master'] = '127.0.0.1'
+default['rax']['php-fpm']['slaves'] = []
+
+# Role settings
+default[:rax][:magento][:master] = false # true if master web node
+default[:rax][:magento][:single] = true # true if single server deployment
