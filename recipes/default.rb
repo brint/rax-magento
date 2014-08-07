@@ -33,4 +33,4 @@ unless File.exist?(File.join(node[:magento][:dir], '.configured'))
 end
 
 include_recipe 'rax-magento::memcached'
-include_recipe 'rax-magento::varnish'
+include_recipe 'rax-magento::varnish' if node[:rax][:magento][:varnish][:use_varnish]
