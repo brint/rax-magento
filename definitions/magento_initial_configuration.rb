@@ -3,6 +3,7 @@ define :magento_initial_configuration do
   bash "Configure Magento" do
     cwd node[:magento][:dir]
     user node[:magento][:user]
+    group node[node[:magento][:webserver]][:group]
     code  <<-EOH
     php -f install.php -- \
     --license_agreement_accepted "yes" \
