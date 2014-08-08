@@ -12,3 +12,10 @@ suites:
   - name: default
     run_list: recipe[rax-magento::default]
     attributes:
+  - name: lsyncd
+    run_list: recipe[rax-magento::lsyncd]
+    attributes:
+      rax:
+        lsyncd:
+          clients:
+          - 192.168.99.99
