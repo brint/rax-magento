@@ -34,5 +34,9 @@ unless File.exist?(File.join(node[:magento][:dir], '.configured'))
   magento_initial_configuration
 end
 
+bash "Set permissions for local.xml" do
+  code "chmod 600 #{File.join(node['magento']['dir'], 'app/etc/local.xml')}"
+end
+
 include_recipe 'rax-magento::memcached'
 include_recipe 'rax-magento::varnish' if node[:rax][:magento][:varnish][:use_varnish]
