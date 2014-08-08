@@ -7,7 +7,7 @@ description 'Installs/Configures Magento'
 long_description IO.read(File.join(File.dirname(__FILE__), 'README.md'))
 version '0.1.1'
 
-depends 'magento', '>= 0.8.5'
+depends 'magento', '>= 0.8.6'
 depends 'php-fpm'
 depends 'percona-install'
 depends 'memcached'
