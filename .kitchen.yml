@@ -10,5 +10,5 @@ platforms:
 
 suites:
   - name: default
-    run_list: recipe[magento-rackspace::default]
+    run_list: recipe[rax-magento::default]
     attributes:
