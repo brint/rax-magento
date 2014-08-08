@@ -20,7 +20,9 @@
 
 # This recipe will build a single server Magento Deployment
 
-node.set[:magento][:http_port] = node[:rax][:magento][:varnish][:backend_http]
+if node[:rax][:magento][:varnish][:use_varnish]
+  node.set[:magento][:http_port] = node[:rax][:magento][:varnish][:backend_http]
+end
 
 include_recipe 'magento::default'
 

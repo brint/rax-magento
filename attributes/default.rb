@@ -35,7 +35,7 @@ default[:rax][:magento][:memcached][:servers][:slow_backend][:retry_interval] = 
 default[:rax][:magento][:memcached][:servers][:slow_backend][:compression] = 0
 
 # Varnish config
-default[:rax][:magento][:varnish][:use_varnish] = true
+default[:rax][:magento][:varnish][:use_varnish] = false
 default[:rax][:magento][:varnish][:backend_http] = 8080
 default[:rax][:magento][:varnish][:http_port] = 80
 default[:rax][:magento][:varnish][:memory] = "#{(node['memory']['total'].to_i / 4) / (1024)}M"
@@ -50,6 +50,7 @@ default[:rax][:magento][:db][:model] = 'mysql4'
 default[:rax][:magento][:db][:type] = 'pdo_mysql'
 default[:rax][:magento][:db][:pdoType] = ''
 default[:rax][:magento][:db][:active] = '1'
+default[:rax][:magento][:encryption_key] = ''
 default[:rax][:magento][:locale] = 'en_US'
 default[:rax][:magento][:timezone] = 'America/Chicago'
 default[:rax][:magento][:default_currency] = 'USD'

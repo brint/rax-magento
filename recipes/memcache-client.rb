@@ -12,3 +12,5 @@ when "centos", "fedora"
     notifies :restart, "service[php-fpm]"
   end
 end
+
+node.set_unless[:magento][:session][:save_path] = "tcp://#{node[:rax][:magento][:memcached][:servers][:sessions][:servers]}:#{node[:rax][:magento][:memcached][:servers][:sessions][:server_port]}?persistent=0&amp;weight=2&amp;timeout=10&amp;retry_interval=10"
