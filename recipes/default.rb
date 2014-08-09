@@ -28,14 +28,16 @@ include_recipe 'magento::default'
 
 include_recipe 'rax-magento::php_fpm'
 include_recipe 'rax-magento::my_cnf'
-include_recipe 'rax-magento::memcache-client'
 
 unless File.exist?(File.join(node[:magento][:dir], '.configured'))
+  node.set_unless[:rax][:magento][:encryption_key] = Magento.magento_encryption_key
   magento_initial_configuration
 end
 
-bash "Set permissions for local.xml" do
-  code "chmod 600 #{File.join(node['magento']['dir'], 'app/etc/local.xml')}"
+include_recipe 'rax-magento::memcache-client'
+
+bash 'Set permissions for local.xml*' do
+  code "chmod 600 #{File.join(node['magento']['dir'], 'app/etc/local.xml')}*"
 end
 
 include_recipe 'rax-magento::memcached'
