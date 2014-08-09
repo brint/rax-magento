@@ -42,3 +42,5 @@ end
 
 include_recipe 'rax-magento::memcached'
 include_recipe 'rax-magento::varnish' if node[:rax][:magento][:varnish][:use_varnish]
+
+Magento.reindex_all(File.join(node[:magento][:dir], '/shell/indexer.php'))
