@@ -13,10 +13,10 @@ define :fpm_allow do
   end
 
   node['php-fpm']['pools'].each do |pool|
-    bash "Permit slave nodes of #{pool} to leverage this PHP-FPM setup" do
-      cwd "#{php_conf[0]}/pools/" # php.ini location
+    bash "Permit slave nodes of #{pool[:listen]} to leverage this PHP-FPM setup" do
+      cwd File.join(php_conf[0], 'pool.d')  # php.ini location
       code <<-EOH
-      sed -i 's/listen.allowed_clients = .*/listen.allowed_clients = 127.0.0.1#{permit}/' #{pool}.conf
+      sed -i 's/listen.allowed_clients = .*/listen.allowed_clients = 127.0.0.1#{permit}/' #{pool[:name]}.conf
       EOH
       notifies :restart, resources(:service => "php-fpm")
     end
