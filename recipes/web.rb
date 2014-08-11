@@ -90,4 +90,5 @@ unless File.exist?(File.join(node[:magento][:dir], '.installed'))
     group group
     mode 0644
     action :create
+  end
 end
