@@ -1,6 +1,6 @@
 #
 # Cookbook Name:: rax-magento
-# Recipe:: firewall-mysql
+# Recipe:: firewall-fpm
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -15,27 +15,31 @@
 # limitations under the License.
 #
 
+fpm_port = node['php-fpm']['pools'][0]['listen'].split(":")[1].to_i
+
 case node["platform_family"]
 when "rhel", "fedora"
   fwfile = "/etc/sysconfig/iptables"
-  %w{ node[:mysql][:port] }.each do |port|
-    rule = "-I INPUT -p tcp -m tcp --dport #{port} -j ACCEPT"
-    execute "Adding iptables rule for #{port}" do
+
+  node['rax']['php-fpm']['slaves'].flatten.each do |ip|
+    rule = "-I INPUT -s #{ip} -p tcp -m tcp --dport #{fpm_port} -j ACCEPT"
+    execute "Adding fpm iptables rule for #{ip}" do
       command "iptables #{rule}"
       not_if "grep \"\\#{rule}\" #{fwfile}"
     end
   end
   # Save iptables rules
-  execute "Saving mysql iptables rule set" do
+  execute "Saving memcached iptables rule set" do
     command "/sbin/service iptables save"
   end
 else
   include_recipe "firewall"
 
-  firewall_rule "mysql" do
-    port node[:mysql][:port].to_i
-    protocol :tcp
-    interface node[:mysql][:interface]
-    action :allow
+  node['rax']['php-fpm']['slaves'].flatten.each do |ip|
+    firewall_rule "php-fpm allow #{ip}" do
+      port fpm_port
+      source ip
+      action :allow
+    end
   end
 end
