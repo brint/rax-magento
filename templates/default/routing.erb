@@ -1,0 +1,35 @@
+# The 'readonly' fastcgi_pass backend, used for standard pages. Cannot write to filesystem. Can be used on any web-0x node.
+upstream ro_php_fpm {
+        server <%= @local %>:9001;
+}
+# The 'canwrite' fastcgi_pass backend, used for admin and upload style pages. Can write to fs on web-01
+upstream rw_php_fpm {
+        server <%= @master %>:9001;
+}
+# All http POST, PUT and similar requests go to the master node 
+# We only handle GET and HEAD on the ro backend
+## The way this works is:
+## 1. It makes up string; for examle
+##     METHOD:GET COOKIE:<some_val> URL:/some/place
+## 2. Then it checks each of the regex's below in order (lines starting with ~ ore regexes
+## 3. Once it finds a match, it sets that to the $fcgi_pass varable
+## 4. In the vhost the variable is read and the upstream chosen
+## 
+## If you need to add more vhosts with different rules, just add more maps to
+## different variable names, like fcgi_pass_site2.
+##
+## Map is more efficient than 'if' because:
+##  * It is only calculated if the var is read somewhere
+##  * Once it gets a motch it returns, and doesn't bother checking the rest
+map "METHOD:$request_method COOKIE:<${cookie_adminhtml}> URL:$request_uri." $fcgi_pass {
+        default                 ro_php_fpm;
+        ~METHOD:POST            rw_php_fpm;
+        ~METHOD:PUT             rw_php_fpm;
+        ~URL:.*admin.*          rw_php_fpm;
+        ~URL:/var/export/       rw_php_fpm;
+        ~URL:/install/          rw_php_fpm;
+        ~URL:/contacts/         rw_php_fpm;
+        ~URL:^media/captcha/.*  rw_php_fpm;
+        ~COOKIE:<>              ro_php_fpm;
+        ~COOKIE:<.+>            rw_php_fpm;
+}

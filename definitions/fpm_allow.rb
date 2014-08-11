@@ -1,4 +1,5 @@
 define :fpm_allow do
+  nginx_setup  # Setup routes for php-fpm admin calls
 
   php_conf =  if platform?('centos', 'redhat')
                 ["/etc", "/etc/php.d"]

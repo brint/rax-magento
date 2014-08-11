@@ -89,6 +89,8 @@ unless File.exist?(File.join(node[:magento][:dir], '.installed'))
 
   include_recipe "magento::_web_#{node[:magento][:webserver]}"
 
+  nginx_setup  # Setup routes for admin calls
+
   directory File.join(node[:magento][:dir], '.ssh') do
     owner user
     group group
