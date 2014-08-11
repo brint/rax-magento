@@ -29,10 +29,7 @@ include_recipe 'magento::default'
 include_recipe 'rax-magento::php_fpm'
 include_recipe 'rax-magento::my_cnf'
 
-unless File.exist?(File.join(node[:magento][:dir], '.configured'))
-  node.set_unless[:rax][:magento][:encryption_key] = Magento.magento_encryption_key
-  magento_initial_configuration
-end
+include_recipe 'rax-magento::config_magento'
 
 include_recipe 'rax-magento::memcache-client'
 
