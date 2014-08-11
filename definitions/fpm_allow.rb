@@ -23,7 +23,7 @@ define :fpm_allow do
   end
 
   # Setup firewall rules
-  fpm_port = node['php-fpm']['pool']['magento']['listen'].split(":")[1].to_i
+  fpm_port = node['php-fpm']['pools'][0]['listen'].split(":")[1].to_i
 
   case node["platform_family"]
   when "rhel", "fedora"
