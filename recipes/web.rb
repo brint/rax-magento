@@ -28,6 +28,7 @@ unless File.exist?(File.join(node[:magento][:dir], '.installed'))
   end
 
   include_recipe 'php-fpm'
+  include_recipe 'rax-magento::php_fpm'
 
   package 'libmcrypt' if platform?('centos', 'redhat')
 
