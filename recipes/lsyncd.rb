@@ -22,13 +22,13 @@ include_recipe 'lsyncd'
 
 if node['rax']['lsyncd']['ssh']['private_key']
 
-  template "/etc/lsyncd/lsyncd.exclude" do
-    source "lsyncd.exclude.erb"
-    owner "root"
-    group "root"
+  template '/etc/lsyncd/lsyncd.exclusions' do
+    source 'lsyncd.exclude.erb'
+    owner 'root'
+    group 'root'
     mode 0644
     variables(
-      :exclusions => node['rax']['lsyncd']['exclusions']
+      exclusions: node['rax']['lsyncd']['exclusions']
     )
   end
 
