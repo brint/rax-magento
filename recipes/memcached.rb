@@ -1,5 +1,4 @@
 # Encoding: utf-8
-service "php-fpm"
 
 ####### Session Caching #######
 node.set[:magento][:session][:save] = 'memcache'
