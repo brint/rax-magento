@@ -21,6 +21,17 @@
 include_recipe 'lsyncd'
 
 if node['rax']['lsyncd']['ssh']['private_key']
+
+  template "/etc/lsyncd/lsyncd.exclude" do
+    source "lsyncd.exclude.erb"
+    owner "root"
+    group "root"
+    mode 0644
+    variables(
+      :exclusions => node['rax']['lsyncd']['exclusions']
+    )
+  end
+
   directory File.join(node['magento']['dir'], '.ssh') do
     owner node['magento']['user']
     group node['magento']['user']

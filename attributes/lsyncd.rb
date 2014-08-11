@@ -24,7 +24,7 @@ default['rax']['lsyncd']['clients'] = []
 default['rax']['lsyncd']['excludes_file'] = '/etc/lsyncd/lsyncd.exclusions'
 default['rax']['lsyncd']['exclusions'] = ['.ssh']
 
-pub_keypath = File.join("/var/www/vhosts/#{node['magento']['hostname']}", '.ssh/id_rsa')
+keypath = File.join(node['magento']['dir'], '.ssh/id_rsa')
 
 default['rax']['lsyncd']['rsync_opts'] = ['-rlpgoDvz', '-e',
-  "/usr/bin/ssh -i #{pub_keypath} -o StrictHostKeyChecking=no" ]
+  "/usr/bin/ssh -i #{keypath} -o StrictHostKeyChecking=no" ]
