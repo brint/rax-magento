@@ -66,6 +66,19 @@ unless File.exist?(File.join(node[:magento][:dir], '.installed'))
     notifies :restart, resources(service: 'php-fpm')
   end
 
+  case node[:platform]
+  when "ubuntu", "debian"
+    package "php5-memcache" do
+      action :install
+      notifies :restart, "service[php-fpm]"
+    end
+  when "centos", "fedora"
+    package "php-pecl-memcache" do
+      action :install
+      notifies :restart, "service[php-fpm]"
+    end
+  end
+
   directory node[:magento][:dir] do
     owner user
     group group
