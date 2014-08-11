@@ -1,5 +1,5 @@
 #
-# Cookbook Name:: magento
+# Cookbook Name:: rax-magento
 # Recipe:: firewall-memcached
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -19,8 +19,8 @@ case node["platform_family"]
 when "rhel", "fedora"
   fwfile = "/etc/sysconfig/iptables"
 
-  node[:magento][:memcached][:clients].flatten.each do |ip|
-    %w{ node[:magento][:memcached][:slow_backend][:port] node[:magento][:memcached][:sessions][:port]}.each do |port|
+  node[:rax][:magento][:memcached][:clients].flatten.each do |ip|
+    %w{ node[:rax][:magento][:memcached][:slow_backend][:port] node[:rax][:magento][:memcached][:sessions][:port]}.each do |port|
       rule = "-I INPUT -s #{ip} -p tcp -m tcp --dport #{port} -j ACCEPT"
       execute "Adding iptables rule for #{port}" do
         command "iptables #{rule}"
@@ -35,12 +35,12 @@ when "rhel", "fedora"
 else
   include_recipe "firewall"
 
-  node[:magento][:memcached][:clients].flatten.each do |ip|
+  node[:rax][:magento][:memcached][:clients].flatten.each do |ip|
     %w{ slow_backend sessions }.each do |port|
       firewall_rule "memcached-#{port}" do
-        port node[:magento][:memcached][port][:port]
+        port node[:rax][:magento][:memcached][port][:port]
         source ip
-        interface node[:magento][:memcached][port][:interface]
+        interface node[:rax][:magento][:memcached][port][:interface]
         action :allow
       end
     end
