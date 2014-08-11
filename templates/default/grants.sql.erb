@@ -1,0 +1,4 @@
+GRANT ALL PRIVILEGES ON <%= @database[:database] %>.* TO '<%= @database[:username] %>'@'localhost' IDENTIFIED BY '<%= @database[:password] %>';
+GRANT ALL PRIVILEGES ON <%= @database[:database] %>.* TO '<%= @database[:username] %>'@'<%= database[:acl] %>' IDENTIFIED BY '<%= @database[:password] %>';
+
+FLUSH PRIVILEGES;
