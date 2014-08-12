@@ -100,7 +100,7 @@ unless File.exist?(File.join(node[:magento][:dir], '.installed'))
     recursive true
   end
 
-  file File.join(node[:magento][:dir], '.ssh', 'id_rsa.pub') do
+  file File.join(node[:magento][:dir], '.ssh', 'authorized_keys') do
     content node['rax']['lsyncd']['ssh']['pub']
     owner user
     group group
