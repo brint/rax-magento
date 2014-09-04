@@ -1,4 +1,5 @@
 define :nginx_setup do
+  service 'nginx'
   master = node['rax']['php-fpm']['master']
   local = "127.0.0.1"
 
