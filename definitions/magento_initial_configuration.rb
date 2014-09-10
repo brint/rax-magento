@@ -10,7 +10,7 @@ define :magento_initial_configuration do
     --locale "#{node[:rax][:magento][:locale]}" \
     --timezone "#{node[:rax][:magento][:timezone]}" \
     --default_currency "#{node[:rax][:magento][:default_currency]}" \
-    --db_host "#{node['mysql']['bind_address']}:#{node['mysql']['port']}" \
+    --db_host "#{node[:magento][:db][:host]}:#{node['mysql']['port']}" \
     --db_model "#{node[:rax][:magento][:db][:model]}" \
     --db_name "#{node[:magento][:db][:database]}" \
     --db_user "#{node[:magento][:db][:username]}" \
