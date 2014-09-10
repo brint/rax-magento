@@ -51,7 +51,7 @@ unless File.exists?(installed_file)
   end
   bash "Touch #{installed_file} file" do
     require 'time'
-    code "echo # File Created by Chef > #{installed_file} ; echo '#{Time.new.rfc2822()}' >> #{installed_file}"
+    code "echo '# File Created by Chef' > #{installed_file} ; echo '#{Time.new.rfc2822()}' >> #{installed_file}"
   end
 end
 
